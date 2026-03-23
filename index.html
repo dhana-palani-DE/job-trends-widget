@@ -57,22 +57,29 @@
     margin-bottom: 1.5rem;
   }
   .stat {
-    background: #f7f7f5;
     border-radius: 8px;
     padding: .875rem 1rem;
   }
+  .stat:nth-child(1) { background: #E1F5EE; }
+  .stat:nth-child(2) { background: #E6F1FB; }
+  .stat:nth-child(3) { background: #FAEEDA; }
   .stat-label {
     font-size: 11px;
-    color: #888;
     margin-bottom: 5px;
     text-transform: uppercase;
     letter-spacing: .05em;
+    font-weight: 500;
   }
+  .stat:nth-child(1) .stat-label { color: #0F6E56; }
+  .stat:nth-child(2) .stat-label { color: #185FA5; }
+  .stat:nth-child(3) .stat-label { color: #854F0B; }
   .stat-value {
     font-size: 20px;
     font-weight: 600;
-    color: #111;
   }
+  .stat:nth-child(1) .stat-value { color: #085041; }
+  .stat:nth-child(2) .stat-value { color: #0C447C; }
+  .stat:nth-child(3) .stat-value { color: #633806; }
 
   /* ── Role filter pills ── */
   .filters {
