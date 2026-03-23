@@ -1,0 +1,398 @@
+{
+  "Data Analyst": {
+    "total": 20,
+    "trending": "SQL",
+    "skills": [
+      {
+        "n": "SQL",
+        "c": 7
+      },
+      {
+        "n": "datasets",
+        "c": 4
+      },
+      {
+        "n": "AI",
+        "c": 4
+      },
+      {
+        "n": "data science",
+        "c": 3
+      },
+      {
+        "n": "AWS",
+        "c": 2
+      },
+      {
+        "n": "Microsoft",
+        "c": 2
+      },
+      {
+        "n": "dashboards",
+        "c": 2
+      },
+      {
+        "n": "Python",
+        "c": 2
+      },
+      {
+        "n": "data platforms",
+        "c": 2
+      },
+      {
+        "n": "cloud",
+        "c": 2
+      },
+      {
+        "n": "analytics",
+        "c": 2
+      },
+      {
+        "n": "performance marketing strategy",
+        "c": 1
+      },
+      {
+        "n": "long-term analytical programmes",
+        "c": 1
+      },
+      {
+        "n": "commercial impact",
+        "c": 1
+      },
+      {
+        "n": "consumer brands",
+        "c": 1
+      }
+    ]
+  },
+  "Data Scientist": {
+    "total": 20,
+    "trending": "Python",
+    "skills": [
+      {
+        "n": "Python",
+        "c": 15
+      },
+      {
+        "n": "SQL",
+        "c": 14
+      },
+      {
+        "n": "AWS",
+        "c": 14
+      },
+      {
+        "n": "data science",
+        "c": 5
+      },
+      {
+        "n": "Natural language search",
+        "c": 4
+      },
+      {
+        "n": "Visual search",
+        "c": 4
+      },
+      {
+        "n": "AI",
+        "c": 3
+      },
+      {
+        "n": "Machine Learning",
+        "c": 3
+      },
+      {
+        "n": "data engineering",
+        "c": 3
+      },
+      {
+        "n": "Analytics",
+        "c": 2
+      },
+      {
+        "n": "Docker",
+        "c": 2
+      },
+      {
+        "n": "Kubernetes",
+        "c": 2
+      },
+      {
+        "n": "Data Science",
+        "c": 2
+      },
+      {
+        "n": "machine learning",
+        "c": 2
+      },
+      {
+        "n": "quantitative research",
+        "c": 2
+      }
+    ]
+  },
+  "ML Engineer": {
+    "total": 20,
+    "trending": "Python",
+    "skills": [
+      {
+        "n": "Python",
+        "c": 20
+      },
+      {
+        "n": "SQL",
+        "c": 11
+      },
+      {
+        "n": "AWS",
+        "c": 11
+      },
+      {
+        "n": "AI",
+        "c": 6
+      },
+      {
+        "n": "Machine Learning",
+        "c": 5
+      },
+      {
+        "n": "PyTorch",
+        "c": 4
+      },
+      {
+        "n": "Docker",
+        "c": 4
+      },
+      {
+        "n": "Kubernetes",
+        "c": 4
+      },
+      {
+        "n": "GCP",
+        "c": 4
+      },
+      {
+        "n": "BigQuery",
+        "c": 4
+      },
+      {
+        "n": "dbt",
+        "c": 4
+      },
+      {
+        "n": "modern ML frameworks",
+        "c": 4
+      },
+      {
+        "n": "LLMs",
+        "c": 4
+      },
+      {
+        "n": "embeddings",
+        "c": 4
+      },
+      {
+        "n": "RAG",
+        "c": 4
+      }
+    ]
+  },
+  "AI Engineer": {
+    "total": 20,
+    "trending": "Python",
+    "skills": [
+      {
+        "n": "Python",
+        "c": 12
+      },
+      {
+        "n": "AI",
+        "c": 10
+      },
+      {
+        "n": "AWS",
+        "c": 7
+      },
+      {
+        "n": "SQL",
+        "c": 7
+      },
+      {
+        "n": "PyTorch",
+        "c": 7
+      },
+      {
+        "n": "Docker",
+        "c": 7
+      },
+      {
+        "n": "Kubernetes",
+        "c": 7
+      },
+      {
+        "n": "TensorFlow",
+        "c": 3
+      },
+      {
+        "n": "Keras",
+        "c": 3
+      },
+      {
+        "n": "Computer Science",
+        "c": 2
+      },
+      {
+        "n": "Mathematics",
+        "c": 2
+      },
+      {
+        "n": "YC-backed",
+        "c": 2
+      },
+      {
+        "n": "reasoning capabilities",
+        "c": 2
+      },
+      {
+        "n": "production",
+        "c": 2
+      },
+      {
+        "n": "models",
+        "c": 2
+      }
+    ]
+  },
+  "Data Engineer": {
+    "total": 20,
+    "trending": "Databricks",
+    "skills": [
+      {
+        "n": "Databricks",
+        "c": 10
+      },
+      {
+        "n": "AWS",
+        "c": 9
+      },
+      {
+        "n": "Azure",
+        "c": 6
+      },
+      {
+        "n": "Microsoft Fabric",
+        "c": 6
+      },
+      {
+        "n": "Python",
+        "c": 6
+      },
+      {
+        "n": "PySpark",
+        "c": 5
+      },
+      {
+        "n": "Oracle DBMS",
+        "c": 4
+      },
+      {
+        "n": "SQL Server DBMS",
+        "c": 4
+      },
+      {
+        "n": "Microsoft Azure",
+        "c": 4
+      },
+      {
+        "n": "Datav",
+        "c": 4
+      },
+      {
+        "n": "Apache Kafka",
+        "c": 4
+      },
+      {
+        "n": "Kubernetes",
+        "c": 4
+      },
+      {
+        "n": "Docker",
+        "c": 4
+      },
+      {
+        "n": "Spark",
+        "c": 4
+      },
+      {
+        "n": "SQL Server",
+        "c": 3
+      }
+    ]
+  },
+  "All": {
+    "total": 100,
+    "trending": "Python",
+    "skills": [
+      {
+        "n": "Python",
+        "c": 55
+      },
+      {
+        "n": "AWS",
+        "c": 43
+      },
+      {
+        "n": "SQL",
+        "c": 39
+      },
+      {
+        "n": "AI",
+        "c": 23
+      },
+      {
+        "n": "Docker",
+        "c": 17
+      },
+      {
+        "n": "Kubernetes",
+        "c": 17
+      },
+      {
+        "n": "PyTorch",
+        "c": 11
+      },
+      {
+        "n": "Databricks",
+        "c": 10
+      },
+      {
+        "n": "data science",
+        "c": 8
+      },
+      {
+        "n": "Machine Learning",
+        "c": 8
+      },
+      {
+        "n": "Azure",
+        "c": 6
+      },
+      {
+        "n": "Microsoft Fabric",
+        "c": 6
+      },
+      {
+        "n": "PySpark",
+        "c": 5
+      },
+      {
+        "n": "datasets",
+        "c": 4
+      },
+      {
+        "n": "Natural language search",
+        "c": 4
+      }
+    ]
+  }
+}

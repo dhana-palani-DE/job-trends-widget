@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Data & AI Job Trends</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    padding: 0 0 2rem;
+  }
+
+  /* ── Header ── */
+  .header {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 1.75rem 0 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .header-meta {
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: #777;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    background: #f2f2f0;
+    border-radius: 20px;
+    color: #888;
+    border: 1px solid #e5e5e3;
+    margin-left: 8px;
+  }
+
+  /* ── Stat cards ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .stat {
+    background: #f7f7f5;
+    border-radius: 8px;
+    padding: .875rem 1rem;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .stat-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111;
+  }
+
+  /* ── Role filter pills ── */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 1.5rem;
+  }
+  .pill {
+    padding: 5px 14px;
+    font-size: 13px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .pill:hover { background: #f5f5f3; }
+  .pill.active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+  }
+
+  /* ── Chart ── */
+  .chart-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  /* ── Narrative ── */
+  .narrative {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e8e8e8;
+  }
+  .narrative-label {
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 12px;
+  }
+  .narrative-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+  }
+  .narrative-text p { margin-bottom: 1rem; }
+  .narrative-text p:last-child { margin-bottom: 0; }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 1.25rem;
+    font-size: 11px;
+    color: #bbb;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── Loading ── */
+  .loading {
+    text-align: center;
+    padding: 3rem 0;
+    color: #aaa;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <p class="header-meta">UK Data &amp; AI job market</p>
+  <h1 class="header-title">Skills in demand <span class="badge" id="date-badge">Loading...</span></h1>
+  <p class="header-sub">Extracted from live job postings · updated monthly</p>
+</div>
+
+<div id="loading" class="loading">Loading job trends data...</div>
+
+<div id="content" style="display:none">
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Jobs analysed</div>
+      <div class="stat-value" id="stat-jobs">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Top skill</div>
+      <div class="stat-value" id="stat-top">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Trending</div>
+      <div class="stat-value" id="stat-trend">—</div>
+    </div>
+  </div>
+
+  <div class="filters" id="filters"></div>
+
+  <div class="chart-wrap" id="chart-wrap">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div class="narrative" id="narrative" style="display:none">
+    <p class="narrative-label">Analysis</p>
+    <div class="narrative-text" id="narrative-text"></div>
+  </div>
+
+  <div class="footer">
+    <span>Source: Adzuna UK · Skills extracted by AI · <span id="footer-date"></span></span>
+    <span>% of job postings</span>
+  </div>
+</div>
+
+<script>
+// ── Replace this URL with your GitHub Gist raw URL ──────────────────────────
+const DATA_URL = "https://gist.githubusercontent.com/YOUR_USERNAME/YOUR_GIST_ID/raw/trends.json";
+// ─────────────────────────────────────────────────────────────────────────────
+
+const ROLES = ["All", "Data Analyst", "Data Scientist", "ML Engineer", "AI Engineer", "Data Engineer"];
+let db = {};
+let currentRole = "All";
+let chart = null;
+
+async function loadData() {
+  try {
+    const res = await fetch(DATA_URL);
+    db = await res.json();
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("content").style.display = "block";
+
+    const date = db.generated_at
+      ? new Date(db.generated_at).toLocaleDateString("en-GB", { month: "long", year: "numeric" })
+      : "Recent";
+    document.getElementById("date-badge").textContent = date;
+    document.getElementById("footer-date").textContent = "Generated " + date;
+
+    buildFilters();
+    setRole("All");
+  } catch (e) {
+    document.getElementById("loading").textContent = "Failed to load data. Please try again later.";
+  }
+}
+
+function buildFilters() {
+  const wrap = document.getElementById("filters");
+  ROLES.forEach(role => {
+    if (!db[role]) return;
+    const btn = document.createElement("button");
+    btn.className = "pill" + (role === "All" ? " active" : "");
+    btn.textContent = role === "All" ? "All roles" : role;
+    btn.addEventListener("click", () => setRole(role));
+    wrap.appendChild(btn);
+  });
+}
+
+function setRole(role) {
+  currentRole = role;
+  document.querySelectorAll(".pill").forEach(b =>
+    b.classList.toggle("active", b.textContent === (role === "All" ? "All roles" : role))
+  );
+  const d = db[role];
+  if (!d) return;
+  document.getElementById("stat-jobs").textContent = d.total;
+  document.getElementById("stat-top").textContent = d.skills[0]?.n || "—";
+  document.getElementById("stat-trend").textContent = d.trending || "—";
+  updateChart(d);
+  updateNarrative(d);
+}
+
+function updateChart(d) {
+  const sorted = [...d.skills].sort((a, b) => b.c - a.c);
+  const labels = sorted.map(s => s.n);
+  const counts = sorted.map(s => s.c);
+  const total = d.total;
+  const h = Math.max(labels.length * 38 + 80, 200);
+  document.getElementById("chart-wrap").style.height = h + "px";
+  if (chart) { chart.destroy(); chart = null; }
+  chart = new Chart(document.getElementById("chart"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{ data: counts, backgroundColor: "#1D9E75", borderRadius: 3, barThickness: 22 }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.raw} jobs · ${Math.round(ctx.raw / total * 100)}%` } }
+      },
+      scales: {
+        x: {
+          grid: { color: "rgba(0,0,0,.06)" },
+          border: { display: false },
+          ticks: { color: "#999", font: { size: 12 }, callback: v => Math.round(v / total * 100) + "%" }
+        },
+        y: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: { color: "#333", font: { size: 13 } }
+        }
+      }
+    }
+  });
+}
+
+function updateNarrative(d) {
+  const wrap = document.getElementById("narrative");
+  const text = document.getElementById("narrative-text");
+  if (d.narrative) {
+    const paras = d.narrative.split(/\n\n+/).filter(Boolean);
+    text.innerHTML = paras.map(p => `<p>${p}</p>`).join("");
+    wrap.style.display = "block";
+  } else {
+    wrap.style.display = "none";
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>
